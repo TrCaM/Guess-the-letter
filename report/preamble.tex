@@ -1,0 +1,118 @@
+\usepackage{setspace}
+% this is a lorem ipsum generator for adding dummy texts
+\usepackage{lipsum}
+\usepackage{tocloft}
+% to make the first rows bold in tables
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{booktabs}
+% this makes list of figures appear in table of contents
+%\usepackage{apacite}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{url}
+\usepackage[nottoc]{tocbibind}
+
+% for passing temporary notes
+\usepackage{todonotes}
+
+\usepackage{morefloats}
+\usepackage{float}
+
+% highlighting
+\usepackage{soul}
+
+% referencing mutliple things with a single command - \cref
+\usepackage{cleveref}
+\usepackage{multicol}
+
+
+% this makes dots in table of contents
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+% to change the title of contents
+% \renewcommand{\contentsname}{Whatever}
+
+% line numbers for review purposes
+% this package might not be available in default latex installation 
+% get it by 'sudo tlmgr install lineno'
+%\usepackage{lineno}
+%\linenumbers
+
+% this allows checkmarks in the file
+\usepackage{amssymb}
+\DeclareUnicodeCharacter{2714}{\checkmark}
+
+% to be able to include latex comments
+\newenvironment{dummy}{}{}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newcommand\HRule{\rule{\textwidth}{1pt}}
+
+% Color code citing
+\usepackage{accsupp}
+\newcommand*{\noaccsupp}[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+% end
+
+\usepackage{xcolor}
+\usepackage{listings}
+
+\lstdefinestyle{shared}
+{
+    numbers=none,
+    numbersep=1em,
+    numberstyle=\tiny\color{red}\noaccsupp,
+    frame=none,
+    framesep=\fboxsep,
+    framerule=\fboxrule,
+    rulecolor=\color{red},
+    xleftmargin=\dimexpr\fboxsep+\fboxrule\relax,
+    xrightmargin=\dimexpr\fboxsep+\fboxrule\relax,
+    breaklines=true,
+    tabsize=2,
+    columns=flexible,
+}
+
+
+\lstdefinestyle{xml}
+{
+    style=shared,
+    language={XML},
+    %alsolanguage={PSTricks},
+    basicstyle=\small\tt,
+    keywordstyle=\color{blue},
+    commentstyle=\color[rgb]{0.13,0.54,0.13},
+    backgroundcolor=\color{yellow!10},
+    morekeywords={
+        graphicspath,
+        includegraphics,
+        blinddocument,
+    },
+}
+
+\lstdefinestyle{python}
+{
+    style=shared,
+    language={Python},
+    %alsolanguage={[Sharp]C},
+    basicstyle=\small\tt\linespread{0.4},
+    keywordstyle=\color{blue},
+    commentstyle=\color[rgb]{0.13,0.54,0.13},
+    backgroundcolor=\color{cyan!10},
+    morekeywords={
+        Console,
+        @abstractmethod
+        WriteLine,
+        int,
+    },
+}
+
+\lstnewenvironment{xml}
+{\lstset{style=xml}}
+{}
+
+\lstnewenvironment{python}
+{\lstset{style=python}}
+{}
+ 
+\lstset{style=python}
+\linespread{1.0}
+

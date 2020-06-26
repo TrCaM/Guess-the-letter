@@ -1,0 +1,259 @@
+\documentclass[12pt,english,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=english]{babel}
+\else
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\fi
+\usepackage{graphicx}
+% grffile has become a legacy package: https://ctan.org/pkg/grffile
+\IfFileExists{grffile.sty}{%
+\usepackage{grffile}
+}{}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{\Huge\textbf{English Hand Written Letters Classification Using Various AI Techniques}}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \subtitle{COMP 4106 - Project proposal}
+  \author{}
+    \preauthor{}\postauthor{}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{28 February 2020}
+
+\usepackage{float}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
+
+\begin{document}
+\maketitle
+
+\newgeometry{top=1in,bottom=1in,right=0.5in,left=1in}
+
+\newpage
+
+\hypertarget{proposal-english-hand-written-letters-classification-using-various-ai-techniques}{%
+\subsubsection{Proposal: English Hand Written Letters Classification
+Using Various AI
+Techniques}\label{proposal-english-hand-written-letters-classification-using-various-ai-techniques}}
+
+Name: Tri Cao -- Student number: 100971065
+
+\hypertarget{i.-motivation}{%
+\paragraph{I. Motivation}\label{i.-motivation}}
+
+Artificial Intelligent(AI) is a very board branch of Computer Science
+with many real word applications. AI itself has many subfield, and one
+such interesting topic is Computer Vision. Thanks to advance AI
+technology, nowadays just a little camera on hour phone can provide a
+lot of information to users. In this project, I want to take the first
+step into the field by trying to recognize hand written English
+characters using different AI methods and compare their performances
+based on accuracy and time/space complexity.
+
+\hypertarget{ii.-project-description}{%
+\paragraph{II. Project description}\label{ii.-project-description}}
+
+\hypertarget{general}{%
+\subparagraph{1. General}\label{general}}
+
+The main purpose of the project is to develop various AI and machine
+learning techniques classify English hand written letters. Specifically,
+I will develop a software which allows the user to draw English
+lowercase alphabetical letters, and the program will use various AI
+methods to predict the letter from 26 total in the alphabet, and compare
+the performances between methods.
+
+\hypertarget{software-structure}{%
+\subparagraph{2. Software structure}\label{software-structure}}
+
+I will develop a simple web application that allows users to draw the
+hand written digits on the computer screen. In order to have the proper
+complexity for the duration of the project, I will only use a 28 x 28
+pixels grid to allow user to draw the letters. The web client then sends
+the images to a back-end engine which contains the trained letter
+recognition AI models to perform predictions.
+
+After the predictions has been computed, the result together with
+performances metrics will be returned back to the web client to be
+displayed to the users.
+
+\hypertarget{building-the-ai-models}{%
+\paragraph{3. Building the AI models}\label{building-the-ai-models}}
+
+\hypertarget{training-data}{%
+\subparagraph{4. Training data}\label{training-data}}
+
+In order to perform the predictions, training data is necessary for the
+task. We need to obtain a good source hand written letter images
+together with their labels (1 of the 26 character) in order to perform
+the classification task. The AI/machine learning model can then use
+these examples to predict the given pictures by the users
+
+For this project, I have obtain the
+\href{https://www.nist.gov/itl/products-and-services/emnist-dataset}{EMNIST}
+dataset which contains 145,600 images of 28 x 28 pixels of handle
+written English letters, which is big enough to train my models.
+
+\hypertarget{using-existing-library}{%
+\subparagraph{5. Using existing library}\label{using-existing-library}}
+
+All of the models (except Neural network) will be implemented from
+scratch without directly use the existing opensource implementation
+available on the internet. However, to assist complex mathematical
+calculations as quick performance measurements, I am going to use some
+existing library listed below.
+
+\begin{itemize}
+\tightlist
+\item
+  AI model development language: \textbf{python}
+\item
+  Python library used:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Numpy}: Support vector/matrix calculation in high
+    dimensional array
+  \item
+    \textbf{Pandas}: Library that helps working with big dataset
+  \item
+    \textbf{emnist}: Support getting and reading the EMNIST dataset
+  \item
+    \textbf{sklearn}: Provide various machine learning utilities. I will
+    \textbf{not} use their machine learning models to perform the
+    prediction
+  \item
+    \textbf{tensorflow}: support building neural networks
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{iii.-ai-techniques}{%
+\paragraph{III. AI techniques}\label{iii.-ai-techniques}}
+
+Below is the list of possible methods that I will implement and use to
+build the AI classification models. The number of methods to be
+implementations can be adjusted to suit the duration of the project.
+
+\hypertarget{nearest-neighbors-search}{%
+\subparagraph{1. Nearest neighbors
+search}\label{nearest-neighbors-search}}
+
+The nearest neighbor search (NNS) is an optimization problem of finding
+the point that is closest to the sets of points. In the letter
+classification setting, I can map each training images into a high
+dimensional vector, forming a search space for predictions. For new
+images given by user, the model can find the nearest neighbors and
+perform the classification using the labels from the nearest neighbors
+
+\hypertarget{logistic-regression}{%
+\subparagraph{2. Logistic Regression}\label{logistic-regression}}
+
+Logistic Regression is a probabilistic model which uses log-odds ratio
+to determine the decision boundary of the label classes. It directly
+models the log-odds with a linear function, thus we can maximize the
+likelihood to obtain a linear decision boundary, using gradient descent
+method.
+
+\hypertarget{linear-vector-machine-svm}{%
+\subparagraph{3. Linear Vector Machine
+(SVM)}\label{linear-vector-machine-svm}}
+
+Another method that we used was Linear Support vector machine (SVM).
+Linear SVM is another common classifier whose idea is to find a linear
+decision boundary that represents the largest separation between to
+classes, thus it increases the overall generalization. Formally, A
+support-vector machine constructs a hyperplane or set of hyperplanes in
+a high or infinite-dimensional space, in which a good hyperplane has the
+largest distance to the nearest training-data point of any class.
+
+\hypertarget{neural-network-with-tensorflow}{%
+\subparagraph{4. Neural network (with
+Tensorflow)}\label{neural-network-with-tensorflow}}
+
+Neural network is well-known in solving these classification problem.
+However, due to their complexity, I will use the tensorflow to build the
+network. The purpose of using the library is to compare which model
+performs the best.
+
+
+\end{document}

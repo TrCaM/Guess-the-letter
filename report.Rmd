@@ -1,0 +1,94 @@
+---
+title: '\Huge\textbf{COMP 4106 - Assignment 1}'
+subtitle: 'Name: Tri Cao -- Student number: 100971065'
+date: "`r format(Sys.time(), '%d %B %Y')`"
+lang: "en"
+fontsize: 12pt
+output:
+  pdf_document:
+    keep_tex: true
+    fig_caption: yes
+    latex_engine: pdflatex
+    includes:
+      in_header: preamble.tex
+...
+
+\newgeometry{top=1in,bottom=1in,right=0.5in,left=1in}
+\newpage
+\maketitle
+
+## The State space of the game
+
+### 1. States:
+
+Each state of the game includes the following:
+
+- The **size** of the square board: $k$. This value should be fixed for each game
+- **Position of the game objects**: stored in 2 dimension Cartesian coordinate system
+  - **cat**: x_cat and y_cat
+  - **mouse**: x_mouse and y_mouse (for each mouse in the game)
+  - **cheeses**: x_cheese and y_cheese (for each cheese in the game)
+
+### 2. Actions:
+
+In each turn, the state changes based on the combination of actions from each objects in the game:
+
+- Cat: move in L shape pattern, similar to Knight in chess. There is maximum 8 positions possible of the cat on the board to choose from the current state
+- Mouse: allows to move 1 cells horizontally  and 1 cells vertically. Since the mouse always moves to the closest cheese, their path is deterministic for every turn
+  - Moreover, if the position of the cat is the same as the mouse, then the mouse object is removed from the game board
+- Cheese: cheeses can not move. If in a turn the position of a cheese is the same as a mouse, then the cheese will be eaten
+
+**Conclusion:** there are 2 possible actions that change the state of the game every turn:
+  - Move: change the position of the game objects
+  - Eat: Happen if 2 different objects of different types are at the same position.
+
+### 3. Goal test:
+
+- Win: if there are no mouses left (the cat catches all the mouses)
+- Lose: if there are no cheeses left (the mouses eat all the cheeses)
+
+### 4. Path cost:
+
+- The path from the Start state to a Goal state gives the series of moves in a winning game
+
+## The choice of heuristics
+
+### Heuristic 1
+
+
+The closer the cat to the mouse, the better that state is. However, I also think that if the cat is close to the cheese, it could be a good sign as well. Thus my heuristic function return the cost equals to:
+
+$$
+\frac{\sum_{i=1}^{m} 5 \times d_i + \sum_{k=1}^{c} d_k)}{s \times (m \times 5 + c)}
+$$
+
+With:
+
+- $d_i$: the euclidean distance from the cat to mouse $i$
+- $d_k$: the euclidean distance from the cat to cheese $k$
+- $m$: the total number of mouses
+- $c$: the total number of cheeses
+- $s$: the distance move by the cat by each turn $\sqrt{1^2 + 2^2}$
+
+
+### Heuristic 2 (The best algorithm)
+
+- Since the next mouse of the mouse is deterministic, The distance from the cat to the next position of the mouse is considered to be the most important. But the cat may want to behave  a bit differently base on how far the cat to the mouse
+
+a) When the cat is far from the mouse:
+
+In this case, the cat want to get close to the mouse as fast as possible. Thus it will try to go to the midpoint between the mouse and the cheeses it is chasing. Thus the **closer the cat to that midpoint, the better that state is**.
+
+Thus we calculate:
+- The location of the midpoint: the middle coordinate between the mouse and the closest cheese to the mouse.
+- The euclidean distance from the cat to the midpoint: $d_{mid}$
+
+b) When the cat is close from the mouse:
+
+When the distance of cat gets closer to the mouse $d_{mid}$ will decrease to 0 and not really makes a big impact on the algorithm anymore. In this case,  **the distance between the cat to next position of the mouse** is the most important here. We obtain this second factor:
+
+- The euclidean distance from the cat to the next position of the mouse: $d_{next}$
+
+Finally, when the cat is next to the mouse (1 distance away), since the cat cannot move for 1 distance, the cat need to avoid the next to position at much as possible. This is my third term: $d_{step} = s - d_{ctm}$, with $s$ be the move distance of the cat minus the distance from the cat to the mouse ($d_{ctm}$)
+
+Thus we have the heuristic cost = $d_{mid} - 3 * d_{next} - 3 * d_{cmt}$

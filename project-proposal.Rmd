@@ -1,0 +1,112 @@
+---
+title: '\Huge\textbf{English Hand Written Letters Classification Using Various AI Techniques}'
+subtitle: 'COMP 4106 - Project proposal'
+date: "`r format(Sys.time(), '%d %B %Y')`"
+lang: "en"
+fontsize: 12pt
+output:
+  pdf_document:
+    keep_tex: true
+    fig_caption: yes
+    latex_engine: pdflatex
+    includes:
+      in_header: preamble.tex
+...
+
+\newgeometry{top=1in,bottom=1in,right=0.5in,left=1in}
+
+\newpage
+
+### Proposal: English Hand Written Letters Classification Using Various AI Techniques
+
+Name: Tri Cao -- Student number: 100971065
+
+#### I. Motivation
+
+Artificial Intelligent(AI) is a very board branch of Computer Science with many real word applications.
+AI itself has many subfield, and one such interesting topic is Computer Vision. Thanks to advance AI
+technology, nowadays just a little camera on hour phone can provide a lot of information to users.
+In this project, I want to take the first step into the field by trying to recognize hand written
+English characters using different AI methods and compare their performances based on accuracy and
+time/space complexity.
+
+#### II. Project description
+
+##### 1. General
+
+The main purpose of the project is to develop various AI and machine learning techniques classify
+English hand written letters. Specifically, I will develop a software which allows the user to draw
+English lowercase alphabetical letters, and the program will use various AI methods to predict the
+letter from 26 total in the alphabet, and compare the performances between methods. 
+
+##### 2. Software structure
+
+I will develop a simple web application that allows users to draw the hand written digits on the
+computer screen. In order to have the proper complexity for the duration of the project, I will only
+use a 28 x 28 pixels grid to allow user to draw the letters. The web client then sends the images to
+a back-end engine which contains the trained letter recognition AI models to perform predictions. 
+
+After the predictions has been computed, the result together with performances metrics will be returned
+back to the web client to be displayed to the users.
+
+#### 3. Building the AI models
+
+##### 4. Training data
+
+In order to perform the predictions, training data is necessary for the task. We need to obtain a 
+good source hand written letter images together with their labels (1 of the 26 character) in order
+to perform the classification task. The AI/machine learning model can then use these examples to
+predict the given pictures by the users
+
+For this project, I have obtain the [EMNIST](https://www.nist.gov/itl/products-and-services/emnist-dataset)
+dataset which contains 145,600 images of 28 x 28 pixels of handle written English letters, which is
+big enough to train my models.
+
+##### 5. Using existing library
+
+All of the models (except Neural network) will be implemented from scratch without directly use the
+existing opensource implementation available on the internet. However, to assist complex mathematical
+calculations as quick performance measurements, I am going to use some existing library listed below.
+
+- AI model development language: **python**
+- Python library used:
+  - **Numpy**: Support vector/matrix calculation in high dimensional array
+  - **Pandas**: Library that helps working with big dataset
+  - **emnist**: Support getting and reading the EMNIST dataset
+  - **sklearn**: Provide various machine learning utilities. I will **not** use their machine learning models
+  to perform the prediction
+  - **tensorflow**: support building neural networks
+
+#### III. AI techniques
+
+Below is the list of possible methods that I will implement and use to build the AI classification
+models. The number of methods to be implementations can be adjusted to suit the duration of the
+project.
+
+##### 1. Nearest neighbors search
+
+The nearest neighbor search (NNS) is an optimization problem of finding the point that is closest
+to the sets of points. In the letter classification setting, I can map each training images into a
+high dimensional vector, forming a search space for predictions. For new images given by user, the
+model can find the nearest neighbors and perform the classification using the labels from the nearest
+neighbors
+
+##### 2. Logistic Regression
+
+Logistic Regression is a probabilistic model which uses log-odds ratio to determine the decision
+boundary of the label classes. It directly models the log-odds with a linear function, thus we can
+maximize the likelihood to obtain a linear decision boundary, using gradient descent method. 
+
+##### 3. Linear Vector Machine (SVM)
+
+Another method that we used was Linear Support vector machine (SVM). Linear SVM is another common
+classifier whose idea is to find a linear decision boundary that represents the largest separation
+between to classes, thus it increases the overall generalization. Formally, A support-vector machine
+constructs a hyperplane or set of hyperplanes in a high or infinite-dimensional space, in which a
+good hyperplane has the largest distance to the nearest training-data point of any class.
+
+##### 4. Neural network (with Tensorflow)
+
+Neural network is well-known in solving these classification problem. However, due to their complexity,
+I will use the tensorflow to build the network. The purpose of using the library is to compare which
+model performs the best.

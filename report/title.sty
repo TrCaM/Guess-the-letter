@@ -1,0 +1,42 @@
+\onehalfspacing
+\pagenumbering{gobble}
+\newgeometry{margin=1in}
+
+%\listoftodos
+\newpage
+
+\begin{titlepage}
+\begin{tikzpicture}[remember picture, overlay]
+  \draw[line width = 4pt] ($(current page.north west) + (1in,-1in)$) rectangle ($(current page.south east) + (-1in,1in)$);
+\end{tikzpicture}
+
+\begin{center}
+\normalsize{Carleton University}\\
+\vspace*{13\baselineskip}
+\Huge{\textbf{COMP 4106 - Final Project}}\\
+\Large{\textbf{Predict Hand Written Letters Using Various Classfiers}}\\
+\vspace*{8\baselineskip}
+\Large{\textbf{ Tri Cao - ID: 100971065}}\\
+\vspace*{2\baselineskip}
+\Large{\textbf{Date}}\\
+\today
+\end{center}
+\end{titlepage}
+
+\doublespacing
+
+\hypersetup{linkcolor = black}
+\newpage
+
+\newgeometry{margin=1in}
+
+\pagenumbering{roman}
+\tableofcontents
+\addcontentsline{toc}{section}{\contentsname}
+
+\newpage
+\doublespacing
+
+\newpage
+\pagenumbering{arabic}
+\hypersetup{linkcolor = blue}
